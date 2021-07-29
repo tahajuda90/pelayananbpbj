@@ -18,7 +18,7 @@
                 foreach($guest as $gst){
                     ?>
             <tr>
-                <td><a type="button" href="<?= base_url('welcome/catat/').$gst->id_role?>" class="btn btn-lg btn-block btn-primary"><?=$gst->jenis_tamu?></a></td>
+                <td><a type="button" href="<?= base_url('Pelayanan/').$gst->id_role?>" class="btn btn-lg btn-block btn-primary"><?=$gst->jenis_tamu?></a></td>
             <td><h1><?=$gst->jumlah?> Orang</h1></td>
             </tr>
                     
