@@ -11,6 +11,11 @@ class C_Department extends CI_Controller
         $this->load->model('M_Department');
         $this->load->library('form_validation');
         $this->load->library('Datatables');
+         if (!$this->ion_auth->logged_in()) {
+            redirect('Auth', 'refresh');
+        }else if(!$this->ion_auth->is_admin()){
+            redirect('C_Visitor'); 
+        }
     }
 
     public function index()

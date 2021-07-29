@@ -81,7 +81,7 @@ class Auth extends CI_Controller
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/Dt_ktgr', 'refresh');
+				redirect('C_Department', 'refresh');
 			}
 			else
 			{
@@ -465,7 +465,7 @@ class Auth extends CI_Controller
 	public function create_user()
 	{
 		$this->data['title'] = $this->lang->line('create_user_heading');
-                $this->data['page'] = 'page_form_user';
+                $this->data['page'] = 'user/page_form_user';
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
@@ -576,7 +576,7 @@ class Auth extends CI_Controller
 				'value' => $this->form_validation->set_value('password_confirm'),
 			];
 
-			$this->_render_page('main', $this->data);
+			$this->_render_page('Main_V', $this->data);
 		}
 	}
 	/**
@@ -597,7 +597,7 @@ class Auth extends CI_Controller
 	public function edit_user($id)
 	{
 		$this->data['title'] = $this->lang->line('edit_user_heading');
-                $this->data['page'] = 'page_form_user';
+                $this->data['page'] = 'user/page_form_user';
 		if (!$this->ion_auth->logged_in() || (!$this->ion_auth->is_admin() && !($this->ion_auth->user()->row()->id == $id)))
 		{
 			redirect('/auth', 'refresh');
@@ -752,7 +752,7 @@ class Auth extends CI_Controller
 			'type' => 'password'
 		];
 
-		$this->_render_page('main', $this->data);
+		$this->_render_page('Main_V', $this->data);
 	}
 
 	/**

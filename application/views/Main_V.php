@@ -13,6 +13,10 @@
         <link rel="stylesheet" href="<?= base_url()?>/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
         <link rel="stylesheet" href="<?= base_url()?>/assets/plugins/toastr/toastr.min.css">
         <link rel="stylesheet" href="<?= base_url()?>/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+        
+        <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
+        <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
+        
     </head>
     <body class="hold-transition sidebar-mini">
         <script src="<?= base_url()?>/assets/plugins/jquery/jquery.min.js"></script>

@@ -1,72 +1,34 @@
-<!doctype html>
-<html>
-    <head>
-        <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-        <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
-        <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
-        <style>
-            .dataTables_wrapper {
-                min-height: 500px
-            }
-            
-            .dataTables_processing {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 100%;
-                margin-left: -50%;
-                margin-top: -25px;
-                padding-top: 20px;
-                text-align: center;
-                font-size: 1.2em;
-                color:grey;
-            }
-            body{
-                padding: 15px;
-            }
-        </style>
-    </head>
-    <body>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Daftar Kunjungan</h3>
+    </div>
+    <div class="card-body table-responsive ">
         <div class="row" style="margin-bottom: 10px">
-            <div class="col-md-4">
-                <h2 style="margin-top:0px">Visitor List</h2>
-            </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 4px"  id="message">
                     <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
                 </div>
             </div>
-            <div class="col-md-4 text-right">
-                <?php echo anchor(site_url('c_visitor/create'), 'Create', 'class="btn btn-primary"'); ?>
-	    </div>
         </div>
-        <table class="table table-bordered table-striped" id="mytable">
+        <table class="table table-bordered table-hover" id="mytable">
             <thead>
                 <tr>
-                    <th width="80px">No</th>
-		    <th>Email</th>
-		    <th>Unik</th>
-		    <th>Role</th>
-		    <th>No Identitas</th>
-		    <th>Nama</th>
-		    <th>Kelamin</th>
-		    <th>Instansi</th>
-		    <th>Telepon</th>
+                    <th width="40px">No</th>
+		    <th>Email / No Telp</th>                    
+		    <th width="300px">Identitas</th>
+		    <th>Jenis Tamu</th>
+                    <th>Asal Instansi</th>
 		    <th>Keperluan</th>
 		    <th>Keterangan</th>
-		    <th>Surat Tugas</th>
-		    <th>Wajah</th>
-		    <th>Created Date</th>
-		    <th>Updated Date</th>
-		    <th width="200px">Action</th>
+		    <th >Action</th>
                 </tr>
             </thead>
 	    
         </table>
-        <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
-        <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
-        <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
+    </div>
+</div>
+<script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
+<script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
@@ -102,10 +64,38 @@
                     columns: [
                         {
                             "data": "id_visit",
-                            "orderable": false
-                        },{"data": "email"},{"data": "unik"},{"data": "role"},{"data": "no_identitas"},{"data": "nama"},{"data": "kelamin"},{"data": "instansi"},{"data": "telepon"},{"data": "keperluan"},{"data": "keterangan"},{"data": "surat_tugas"},{"data": "wajah"},{"data": "created_date"},{"data": "updated_date"},
+                    orderable: false
+                        },{"data": "email",
+                            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol){
+                                var html = oData.email;
+                                html += "<br/>No Telp: "+oData.telepon;
+                                $(nTd).html(html);
+                            },
+                    orderable: false
+                        },{"data": "no_identitas",
+                            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                                var kel = "none";
+                                switch(oData.kelamin){
+                                case "P":
+                                    kel = "Perempuan";
+                                    break;
+                                case "L":
+                                    kel = "Laki-Laki";
+                                    break;
+                                default:
+                                    kel = "None";
+                               }
+                                var html = oData.nama;
+                                html += '<br>'+oData.unik+" : "+oData.no_identitas;
+                                html += '<br>Kelamin: '+kel;
+                                $(nTd).html(html);},
+                    orderable: false
+                        },
+                        {"data": "jenis_tamu"},{"data": "instansi"},
+                        {"data": "service"},{"data": "keterangan",
+                    orderable: false},
                         {
-                            "data" : "action",
+                            "data" : "id_visit",
                             "orderable": false,
                             "className" : "text-center"
                         }
@@ -121,5 +111,3 @@
                 });
             });
         </script>
-    </body>
-</html>

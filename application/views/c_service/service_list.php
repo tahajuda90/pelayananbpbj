@@ -52,9 +52,10 @@
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('C_Service/update/'.$c_service->id_serv),'Update'); 
-				echo ' | '; 
+                                if($c_service->jumlah == 0){echo ' | '; 
 				echo anchor(site_url('C_Service/delete/'.$c_service->id_serv),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
-				?>
+                                }
+                                ?>
 			</td>
 		</tr>
                 <?php

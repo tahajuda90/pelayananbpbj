@@ -11,9 +11,11 @@
                 <?php
                 if(isset($departemen)){
                     foreach($departemen as $dpt){
-                        ?>
-                <option value="<?=$dpt->id_dprtm?>"><?=$dpt->nama_dprt?></option>
-                <?php
+                if($dpt->id_dprtm == $id_dprtm){
+                 echo '<option selected="true" value="'.$dpt->id_dprtm.'">'.$dpt->nama_dprt.'</option>'  ;   
+                }else{
+                 echo '<option value="'.$dpt->id_dprtm.'">'.$dpt->nama_dprt.'</option>'  ;
+                }                
                     }
                 }
                 ?>
@@ -27,9 +29,11 @@
                 <?php
                 if(isset($jenis)){
                     foreach($jenis as $jns){
-                        ?>
-                <option value="<?=$jns->id_role?>"><?=$jns->jenis_tamu?></option>
-                <?php
+                        if($jns->id_role == $id_role){
+                            echo '<option selected="true" value="'.$jns->id_role.'">'.$jns->jenis_tamu.'</option>';
+                        }else{
+                            echo '<option value="'.$jns->id_role.'">'.$jns->jenis_tamu.'</option>';
+                        }
                     }
                 }
                 ?>

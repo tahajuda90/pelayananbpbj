@@ -10,6 +10,9 @@ class C_Guest extends CI_Controller
         parent::__construct();
         $this->load->model('M_Guest');
         $this->load->library('form_validation');
+        if (!$this->ion_auth->logged_in()) {
+            redirect('Auth', 'refresh');
+        }
     }
 
     public function index()

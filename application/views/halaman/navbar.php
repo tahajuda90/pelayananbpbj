@@ -15,12 +15,7 @@
     </a>
     <div class="sidebar">
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="<?= base_url('C_Department')?>" class="nav-link">
-                        <p>Department</p>
-                    </a>
-                </li>                
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">              
                 <li class="nav-item">
                     <a href="<?= base_url('C_Guest')?>" class="nav-link">
                         <p>Jenis Tamu</p>
@@ -32,10 +27,27 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="<?= base_url('C_Visitor')?>" class="nav-link">
                         <p>Kunjungan</p>
                     </a>
                 </li>
+                <?php
+                if ($this->ion_auth->is_admin()) {
+                    ?>
+                <li class="nav-header">Administrator</li>
+                <li class="nav-item">
+                    <a href="<?= base_url('User_manajemen')?>" class="nav-link">
+                        <p>User Manajemen</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('C_Department')?>" class="nav-link">
+                        <p>Department</p>
+                    </a>
+                </li>
+                <?php
+                }
+                ?>
             </ul>
         </nav>
     </div>

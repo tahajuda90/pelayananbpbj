@@ -11,11 +11,15 @@ class C_Visitor extends CI_Controller
         $this->load->model('M_Visitor');
         $this->load->library('form_validation');        
 	$this->load->library('datatables');
+        if (!$this->ion_auth->logged_in()) {
+            redirect('Auth', 'refresh');
+        }
     }
 
     public function index()
     {
-        $this->load->view('c_visitor/visitor_list');
+        $data['page']='c_visitor/visitor_list';
+        $this->load->view('Main_V',$data);
     } 
     
     public function json() {

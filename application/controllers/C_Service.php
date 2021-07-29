@@ -10,6 +10,9 @@ class C_Service extends CI_Controller
         parent::__construct();
         $this->load->model(array('M_Service','M_Guest','M_Department'));
         $this->load->library('form_validation');
+        if (!$this->ion_auth->logged_in()) {
+            redirect('Auth', 'refresh');
+        }
     }
 
     public function index()
@@ -110,6 +113,8 @@ class C_Service extends CI_Controller
 		'service' => set_value('service', $row->service),
                 'page'=>'c_service/service_form',
 	    );
+            $data['departemen'] = $this->M_Department->get_all();
+            $data['jenis'] = $this->M_Guest->get_all();
             $this->load->view('Main_V', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
