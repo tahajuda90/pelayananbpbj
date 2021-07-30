@@ -100,5 +100,16 @@ class User_model extends CI_Model
 
       return $result;
    }
+   
+   public function get_department(){
+       
+   }
 
+   public function create_department(){
+       
+   }
+   
+   public function delete_department(){
+       
+   }
 }

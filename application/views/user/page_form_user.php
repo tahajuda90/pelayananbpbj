@@ -50,12 +50,13 @@
                   $gID=$group['id'];
                   $checked = null;
                   $item = null;
+                  if(isset($currentGroups)){
                   foreach($currentGroups as $grp) {
                       if ($gID == $grp->id) {
                           $checked= ' checked="checked"';
                       break;
                       }
-                  }
+                  }}
               ?>
               <input type="checkbox" class="form-check-input" name="groups[]" value="<?php echo $group['id'];?>"<?php echo $checked;?>>
               <label class="form-check-label" for="exampleCheck1">

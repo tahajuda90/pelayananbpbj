@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="row" style="margin-bottom: 10px">
                         <div class="col-md-4">
-                            <?php echo anchor(site_url('Auth/create_user'), 'Create', 'class="btn btn-primary"'); ?>
+                            <?php echo anchor(site_url('User_manajemen/create_user'), 'Create', 'class="btn btn-primary"'); ?>
                         </div>
                     </div>
                     <table class="table table-hover text-nowrap">

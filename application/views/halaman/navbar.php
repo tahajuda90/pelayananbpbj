@@ -5,7 +5,7 @@
         </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-        <a class="nav-link" href="#"></a> 
+        <a class="nav-link" href="<?= base_url('Auth/logout')?>"></a> 
         <i class="fas fa-sign-out-alt"></i>
     </ul>
 </nav>
