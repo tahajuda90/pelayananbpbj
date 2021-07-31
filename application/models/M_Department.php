@@ -13,13 +13,18 @@ class M_Department extends CI_Model
     function __construct()
     {
         parent::__construct();
+        $this->load->model('User_model');
     }
 
     // get all
     function get_all()
     {
+        $dep = $this->User_model->get_department($this->ion_auth->get_user_id());
         $this->db->select('department.*,COUNT(service.id_dprtm) as jumlah');
         $this->db->join('service','department.id_dprtm = service.id_dprtm','left');
+        if(!empty($dep)){
+        $this->db->where_in($this->table.'.'.$this->id,$dep);
+        }
         $this->db->group_by('department.id_dprtm');
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();

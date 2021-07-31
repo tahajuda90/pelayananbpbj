@@ -14,7 +14,7 @@ class User_manajemen extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
-        $this->load->model('user_model');
+        $this->load->model(array('user_model','M_Department'));
         $this->load->library(['ion_auth', 'form_validation']);
         $this->load->helper(['url', 'language']);
 
@@ -36,11 +36,32 @@ class User_manajemen extends CI_Controller {
             'user'=>$this->user_model->get_all_users(),
             'page'=>'user/page_usermanajemen'
         );
-        $this->load->view('Main_V', $data);      
+        $this->load->view('Main_V', $data); 
+        //var_dump(explode(',',$data['user'][2]->group_name));
     }
     
-    public function departemen(){
-        
+    public function departemen($id){
+         $this->form_validation->set_rules('department[]', 'Departemen', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $user = $this->ion_auth->user($id)->row();
+            $data['departemen'] = $this->M_Department->get_all();
+            $data['page'] = 'user/department';
+            $data['user'] = $user;
+            $data['currgr'] = $this->user_model->get_department($user->id);
+            $data['action'] = base_url('user_manajemen/departemen/').$user->id;
+            $this->load->view('Main_V', $data);              
+        } else {
+            $group = $this->input->post('department');
+            $userid = $this->input->post('userid');
+            
+            $this->user_model->delete_department($userid);
+            
+            if($this->user_model->create_department($group,$userid)){
+                redirect('user_manajemen');
+            }else{
+                var_dump($group);
+            }            
+        }      
     }
     
     public function create_user() {
@@ -157,7 +178,7 @@ class User_manajemen extends CI_Controller {
     }
 
     public function coba(){
-        var_dump($this->ion_auth->is_admin());
+        var_dump(empty($this->user_model->get_department(2)));
     }
     
 

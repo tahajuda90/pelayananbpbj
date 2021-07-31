@@ -13,15 +13,20 @@ class M_Service extends CI_Model
     function __construct()
     {
         parent::__construct();
+        $this->load->model('User_model');
     }
 
     // get all
     function get_all()
     {
+        $dep = $this->User_model->get_department($this->ion_auth->get_user_id());
         $this->db->select('service.*,department.nama_dprt,guest_type.jenis_tamu,count(visitor.keperluan) as jumlah');
         $this->db->join('department','service.id_dprtm=department.id_dprtm');
         $this->db->join('guest_type','service.id_role=guest_type.id_role');
         $this->db->join('visitor','service.id_serv=visitor.keperluan','left');
+        if(!empty($dep)){
+        $this->db->where_in($this->table.'.id_dprtm',$dep);
+        }
         $this->db->group_by('service.id_serv');
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
@@ -39,8 +44,8 @@ class M_Service extends CI_Model
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('id_serv', $q);
-	$this->db->or_like('id_dprtm', $q);
-	$this->db->or_like('id_role', $q);
+	$this->db->or_like('service.id_dprtm', $q);
+	$this->db->or_like('service.id_role', $q);
 	$this->db->or_like('service', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
@@ -48,6 +53,7 @@ class M_Service extends CI_Model
 
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
+        $dep = $this->User_model->get_department($this->ion_auth->get_user_id());
         $this->db->select('service.*,department.nama_dprt,guest_type.jenis_tamu,count(visitor.keperluan) as jumlah'); 
         $this->db->join('department','service.id_dprtm=department.id_dprtm');
         $this->db->join('guest_type','service.id_role=guest_type.id_role');
@@ -55,9 +61,10 @@ class M_Service extends CI_Model
         $this->db->group_by('service.id_serv');
         $this->db->order_by($this->id, $this->order);
         $this->db->like('service.id_serv', $q);
-	$this->db->or_like('service.id_dprtm', $q);
-	$this->db->or_like('service.id_role', $q);
 	$this->db->or_like('service', $q);
+        if(!empty($dep)){
+        $this->db->where_in($this->table.'.id_dprtm',$dep);
+        }
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

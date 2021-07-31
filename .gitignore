@@ -23,7 +23,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /harviacode/*
 
 /assets/captcha/*
-/application/config/database.php
 
 ## Sublime Text cache files
 *.tmlanguage.cache

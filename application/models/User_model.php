@@ -8,6 +8,8 @@ class User_model extends CI_Model
    public $name = 'username';
    public $email = 'email';
    public $active = 'active';
+   
+   public $department = 'users_department';
 
 
    function __construct()
@@ -101,15 +103,24 @@ class User_model extends CI_Model
       return $result;
    }
    
-   public function get_department(){
-       
+   public function get_department($id){
+       $this->db->select('id_dprtm');
+       $arr = $this->db->where(array('id_user'=>$id))->get($this->department)->result_array();
+       $coba = array_map(function ($value) {
+            return $value['id_dprtm'];
+        },$arr);
+      return $coba;
    }
 
-   public function create_department(){
-       
+   public function create_department($group,$id){
+       $simpan = true;
+       foreach ($group as $gr){
+           $simpan = $simpan && $this->db->insert($this->department,array('id_user'=>$id,'id_dprtm'=>$gr));
+       }
+       return $simpan;
    }
    
-   public function delete_department(){
-       
+   public function delete_department($id){
+       return $this->db->delete($this->department,array('id_user'=>$id));
    }
 }

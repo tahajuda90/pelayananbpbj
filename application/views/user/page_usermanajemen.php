@@ -33,7 +33,14 @@
                             <td><?php echo $usr->email ?></td>
                             <td><?= ($usr->active == 1)? '<a class="btn btn-block btn-danger btn-xs" type="button" href="">Deactive</a>' : '<a class="btn btn-block btn-success btn-xs" type="button" href="'.base_url('auth/activate/'.$usr->id).'">Activate</a>' ?></td>
                             <td><?php echo $usr->group_name ?></td>
-                            <td><a class="btn btn-block btn-primary btn-xs" type="button" href="<?= base_url('auth/edit_user/'.$usr->id)?>">edit</a></td>
+                            <td><a class="btn btn-block btn-primary btn-xs" type="button" href="<?= base_url('auth/edit_user/'.$usr->id)?>">edit</a>
+                            <br>
+                            <?php
+                            if(!in_array('admin', explode(',',$usr->group_name))){
+                                echo '<a class="btn btn-block btn-warning btn-xs" type="button" href="'.base_url('User_manajemen/departemen/'.$usr->id).'">departemen</a>';
+                            }                                
+                            ?>                            
+                            </td>
                             </tr>
                             <?php
                             }?>
