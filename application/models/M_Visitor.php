@@ -26,7 +26,7 @@ class M_Visitor extends CI_Model
         $this->datatables->join('guest_type','visitor.role = guest_type.id_role');
         $this->datatables->join('service','visitor.keperluan = service.id_serv');
         if(!empty($dep)){
-            $this->datatables->where_in('service.id_dprtm',$dep);   
+            $this->datatables->where_in('visitor.id_dprtm',$dep);   
         }
         return $this->datatables->generate();
     }

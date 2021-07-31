@@ -72,10 +72,14 @@ class Welcome extends CI_Controller {
             //print_r($data);
             if($this->session->userdata('mycaptcha') == $this->input->post('security_code')){
                 $this->M_Visitor->insert($data);
+                redirect(site_url('welcome/masuk'));
+            }else{
+                $this->session->set_flashdata('message', 'Captcha yang anda masukan salah');
+                $this->catat($this->input->post('role',TRUE));
             }
             //$this->M_Visitor->insert($data);
             //$this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('welcome/masuk'));
+            
         }
     }
     
