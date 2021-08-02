@@ -19,7 +19,7 @@ class M_Visitor extends CI_Model
     // datatables
     function json() {
         $dep = $this->User_model->get_department($this->ion_auth->get_user_id());
-        $this->datatables->select("id_visit,email,unik,guest_type.jenis_tamu,no_identitas,nama,kelamin,instansi,telepon,service.service,keterangan,surat_tugas,wajah,created_date,updated_date");
+        $this->datatables->select("id_visit,email,unik,guest_type.jenis_tamu,no_identitas,nama,kelamin,instansi,telepon,service.service,keterangan,surat_tugas,wajah,done_time,created_date,updated_date");
         $this->datatables->from('visitor');
         //add this line for join
         //$this->datatables->join('table2', 'visitor.field = table2.field');

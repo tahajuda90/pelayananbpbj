@@ -96,8 +96,13 @@
                     orderable: false},
                         {
                             "data" : "id_visit",
-                            "orderable": false,
-                            "className" : "text-center"
+                            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                                if(oData.done_time === null){
+                                    $(nTd).html('<a type="button" class="btn btn-block btn-success btn-xs">Tamu Selesai</a>');
+                                } else{
+                                    $(nTd).html('Tamu Sudah Pulang');
+                                }                               
+                            }
                         }
                     ],
                     order: [[0, 'desc']],
