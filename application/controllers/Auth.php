@@ -141,7 +141,7 @@ class Auth extends CI_Controller
 		$this->form_validation->set_rules('old', $this->lang->line('change_password_validation_old_password_label'), 'required');
 		$this->form_validation->set_rules('new', $this->lang->line('change_password_validation_new_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|matches[new_confirm]');
 		$this->form_validation->set_rules('new_confirm', $this->lang->line('change_password_validation_new_password_confirm_label'), 'required');
-
+                $this->data['page'] = 'user/change_password';
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login', 'refresh');
@@ -157,23 +157,27 @@ class Auth extends CI_Controller
 
 			$this->data['min_password_length'] = $this->config->item('min_password_length', 'ion_auth');
 			$this->data['old_password'] = [
+                                'class'=>'form-control',
 				'name' => 'old',
 				'id' => 'old',
 				'type' => 'password',
 			];
 			$this->data['new_password'] = [
+                                'class'=>'form-control',
 				'name' => 'new',
 				'id' => 'new',
 				'type' => 'password',
 				'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 			];
 			$this->data['new_password_confirm'] = [
+                                'class'=>'form-control',
 				'name' => 'new_confirm',
 				'id' => 'new_confirm',
 				'type' => 'password',
 				'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
 			];
 			$this->data['user_id'] = [
+                                'class'=>'form-control',
 				'name' => 'user_id',
 				'id' => 'user_id',
 				'type' => 'hidden',
@@ -181,7 +185,7 @@ class Auth extends CI_Controller
 			];
 
 			// render
-			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'change_password', $this->data);
+			$this->_render_page('Main_V', $this->data);
 		}
 		else
 		{

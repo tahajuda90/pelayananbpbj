@@ -83,8 +83,10 @@ class Welcome extends CI_Controller {
         }
     }
     
+    
+    
     public function _rules() {
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('email', 'Email', 'valid_email');
         //$this->form_validation->set_rules('unik', 'unik', 'trim|required');
         //$this->form_validation->set_rules('role', 'role', 'trim|required');
         $this->form_validation->set_rules('no_identitas', 'No Identitas', 'trim|required');

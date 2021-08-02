@@ -5,8 +5,9 @@
         </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-        <a class="nav-link" href="<?= base_url('Auth/logout')?>"></a> 
-        <i class="fas fa-sign-out-alt"></i>
+        <a type="button" class="nav-link" href="<?= base_url('Auth/change_password')?>"><i class="fas fa-edit">Password</i></a>
+        <a class="nav-link" href="<?= base_url('Auth/logout')?>"><i class="fas fa-sign-out-alt"></i></a> 
+        
     </ul>
 </nav>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">

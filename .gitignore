@@ -9,6 +9,7 @@ application/logs/*
 !application/*/.htaccess
 
 composer.lock
+application/config/database.php
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
@@ -22,7 +23,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 .idea/*
 /harviacode/*
 
-/assets/captcha/*
 
 ## Sublime Text cache files
 *.tmlanguage.cache
