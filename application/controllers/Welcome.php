@@ -7,6 +7,7 @@ class Welcome extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model(['M_Guest', 'M_Service', 'M_Visitor']);
+        $this->load->library('recaptcha');
     }
 
     public function masuk() {
@@ -22,7 +23,6 @@ class Welcome extends CI_Controller {
 
     public function catat($role) {
         $guest = $this->M_Guest->get_by_id($role);
-//            print_r($data['service']);
         $data = array(
             'button' => 'Create',
             'action' => site_url('welcome/create_action'),
@@ -38,13 +38,9 @@ class Welcome extends CI_Controller {
             'keperluan' => set_value('keperluan'),
             'keterangan' => set_value('keterangan')
         );
-//       
-        $captcha = create_captcha($this->config->item('captcha'));
-        $this->session->set_userdata('mycaptcha', $captcha['word']);
+        $data['recapca'] = $this->recaptcha->create_box();
         $data['srv'] = $this->M_Service->get_by_role($guest->id_role);
-        $data['img'] = $captcha['image'];
         $data['page'] = 'buku_Tamu';
-        //print_r($data);
         $this->load->view('Main_Guest', $data);
     }
 
@@ -70,7 +66,7 @@ class Welcome extends CI_Controller {
 		'keterangan' => $this->input->post('keterangan',TRUE)
 	    );
             //print_r($data);
-            if($this->session->userdata('mycaptcha') == $this->input->post('security_code')){
+            if($this->recaptcha->is_valid()){
                 $this->M_Visitor->insert($data);
                 redirect(site_url('welcome/masuk'));
             }else{
@@ -83,7 +79,38 @@ class Welcome extends CI_Controller {
         }
     }
     
-    
+    public function coba(){
+        $this->load->library('email');
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.gmail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'tahajuda2@gmail.com',
+            'smtp_pass' => '21juni1994',
+            'mailtype' => 'html',
+            'charset' => 'utf-8'
+        );
+        $this->email->initialize($config);
+        $this->email->set_mailtype("html");
+        $this->email->set_newline("\r\n");
+        //Email content
+        $htmlContent = '<h1>Sending email via SMTP server</h1>';
+        $htmlContent .= '<p>This email has sent via SMTP server from CodeIgniter application.</p>';
+
+        $this->email->to('tahajudamandariansah@gmail.com');
+        $this->email->from('tahajuda2@gmail.com', 'MyWebsite');
+        $this->email->subject('How to send email via SMTP server in CodeIgniter');
+        $this->email->message($htmlContent);
+
+//Send email
+        if(!$this->email->send()){
+            echo $this->email->print_debugger();
+        }else{
+            echo 'Berhasil';
+        }
+        
+        
+    }
     
     public function _rules() {
         $this->form_validation->set_rules('email', 'Email', 'valid_email');

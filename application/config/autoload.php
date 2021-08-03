@@ -11,7 +11,7 @@ $autoload['libraries'] = array('database','session','pagination','form_validatio
 $autoload['drivers'] = array();
 
 
-$autoload['helper'] = array('url','form','captcha','func_helper');
+$autoload['helper'] = array('url','form','func_helper');
 
 
 $autoload['config'] = array();

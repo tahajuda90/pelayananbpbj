@@ -87,13 +87,4 @@ $config['rewrite_short_tags'] = FALSE;
 
 $config['proxy_ips'] = '';
 
-$config['captcha'] =  array(
-            'img_path' => './assets/captcha/',
-            'img_url' => $root.'assets/captcha/',
-            'img_width' => '150',
-            'img_height' => 50,
-            'word_length' => 8,
-            'font_size' => 16,
-            'expiration'=>7200            
-        );
 

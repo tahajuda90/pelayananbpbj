@@ -65,18 +65,13 @@
                                             <textarea class="form-control" name="keterangan" rows="4"><?php echo $keterangan; ?></textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label">Scurity Code</label>
-                                        <div class="col-md-4">
-                                            <?php echo $img; ?>
-                                            <input type="text" name="security_code" class="form-control">
-                                        </div>
-                                    </div>
+                                    <script src='https://www.google.com/recaptcha/api.js'></script>
                                     <input type="hidden" name="id_visit" value="<?php echo $id_visit; ?>" /> 
                                     <input type="hidden" name="role" value="<?php echo $role; ?>" />
                                     <input type="hidden" name="unik" value="<?php echo $unik; ?>" />
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
+                                            <?= $recapca ?>
                                             <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>
 											Submit</button>
                                         </div>

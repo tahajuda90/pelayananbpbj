@@ -60,8 +60,7 @@ class M_Service extends CI_Model
         $this->db->join('visitor','service.id_serv=visitor.keperluan','left');
         $this->db->group_by('service.id_serv');
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('service.id_serv', $q);
-	$this->db->or_like('service', $q);
+	$this->db->like('service', $q);
         if(!empty($dep)){
         $this->db->where_in($this->table.'.id_dprtm',$dep);
         }
