@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bootstrap Admin Theme v3</title>
+        <title>Bagian Pengadaan Barang/Jasa</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <script src="https://code.jquery.com/jquery.js"></script>
@@ -26,6 +26,9 @@
             </div>
         </div>
         <div class="page-content container">
+            <div class="row">
+                <h3><?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?></h3>
+            </div>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="content-box-large">

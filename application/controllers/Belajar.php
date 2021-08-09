@@ -46,11 +46,15 @@ class belajar extends CI_Controller{
     }
     
     public function aksi(){
-                $config['upload_path']          = './gambar/';
+                $uplpath = './gambar/'.date('m');
+                if(!is_dir($uplpath)){
+                    mkdir($uplpath,0755,TRUE);
+                }
+                $config['upload_path']          = $uplpath;
 		$config['allowed_types']        = 'gif|jpg|png|jpeg';
 		$config['max_size']             = 10000;
-		$config['max_width']            = 1024;
-		$config['max_height']           = 1024;
+                $config['encrypt_name']         = TRUE;
+//                $config['file_name']            = 'custom';
  
 		$this->load->library('upload', $config);
  

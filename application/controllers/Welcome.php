@@ -51,8 +51,10 @@ class Welcome extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->catat($this->input->post('role',TRUE));
         } else {
-            $kep =json_decode($this->input->post('keperluan',TRUE));
-            $data = array(
+            $kep =json_decode($this->input->post('keperluan',TRUE));            
+            //print_r($data);
+            if($this->recaptcha->is_valid() && isset($kep)){
+                $data = array(
 		'email' => $this->input->post('email',TRUE),
 		'unik' => $this->input->post('unik',TRUE),
 		'role' => $this->input->post('role',TRUE),
@@ -65,10 +67,11 @@ class Welcome extends CI_Controller {
                 'id_dprtm' => $kep->id_dprtm,
 		'keterangan' => $this->input->post('keterangan',TRUE)
 	    );
-            //print_r($data);
-            if($this->recaptcha->is_valid()){
                 $this->M_Visitor->insert($data);
                 redirect(site_url('welcome/masuk'));
+            }else if ($this->recaptcha->is_valid()){
+                $this->session->set_flashdata('message', 'Pastikan anda sudah memilih keperluan');
+                $this->catat($this->input->post('role',TRUE));
             }else{
                 $this->session->set_flashdata('message', 'Captcha yang anda masukan salah');
                 $this->catat($this->input->post('role',TRUE));
