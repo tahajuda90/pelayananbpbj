@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class belajar extends CI_Controller{
     public function __construct() {
         parent::__construct();
+        $this->load->model(array('M_Visitor','M_Coba'));
     }
     
         
@@ -42,7 +43,8 @@ class belajar extends CI_Controller{
     }
     
     public function belajar(){
-        $this->load->view('CobaUpload', array('error' => ' ' ));
+        print_r($this->M_Coba->relasi());
+        //$this->load->view('CobaUpload', array('error' => ' ' ));
     }
     
     public function aksi(){
@@ -65,5 +67,9 @@ class belajar extends CI_Controller{
 			$data = array('upload_data' => $this->upload->data());
 			var_dump($data);
 		}
+    }
+    
+    public function perhari(){
+        print_r($this->M_Visitor->coba());
     }
 }

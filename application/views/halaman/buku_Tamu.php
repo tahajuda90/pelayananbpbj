@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label" for="text-field">Asal Instansi <?php echo form_error('instansi') ?></label>
+                                        <label class="col-md-2 control-label" for="text-field">Nama Instansi <?php echo form_error('instansi') ?></label>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control" name="instansi" value="<?php echo $instansi; ?>" />
                                         </div>

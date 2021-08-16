@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+date_default_timezone_set('Asia/Jakarta');
 
 $root = "http://".$_SERVER['HTTP_HOST'];
 $root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);

@@ -107,5 +107,9 @@ class M_Visitor extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
+    
+    function coba(){
+        return $this->db->get('perhari')->result();
+    }
 
 }

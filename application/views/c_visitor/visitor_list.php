@@ -20,6 +20,7 @@
                     <th>Asal Instansi</th>
 		    <th>Keperluan</th>
 		    <th>Keterangan</th>
+                    <th>Tanggal</th>
 		    <th >Action</th>
                 </tr>
             </thead>
@@ -91,9 +92,14 @@
                                 $(nTd).html(html);},
                     orderable: false
                         },
-                        {"data": "jenis_tamu"},{"data": "instansi"},
+                        {"data": "jenis_tamu"},{"data": "instansi",searchable:true},
                         {"data": "service"},{"data": "keterangan",
                     orderable: false},
+                {"data": "created_date",
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).html(oData.created_date);
+                    },
+                    orderable: true},
                         {
                             "data" : "id_visit",
                             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
