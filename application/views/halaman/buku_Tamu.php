@@ -8,7 +8,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label" ><?php echo $unik;?> <?php echo form_error('no_identitas') ?></label>
+                                        <label class="col-md-2 control-label" ><?php echo $unik;?> <?php echo form_error('no_identitas') ?><br><small>*Opsional</small></label>
                                         <div class="col-md-7">
                                             <input type="text" class="form-control" name="no_identitas" value="<?php echo $no_identitas; ?>" />
                                         </div>
